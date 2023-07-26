@@ -1,0 +1,42 @@
+{
+  "name": "contact_list",
+  "version": "1.0.0",
+  "description": "Esse projeto visa facilitar o registro de clientes e seus contatos, proporcionando uma maneira eficiente de gerenciar essas informações. O objetivo é criar uma solução prática e funcional para manter um cadastro organizado e acessível, tornando o processo de acompanhamento e interação com os clientes mais eficaz e conveniente",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --rs --cls --ignore-watch node_modules src/server.ts",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marinagv95/Contact_List.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marinagv95/Contact_List/issues"
+  },
+  "homepage": "https://github.com/marinagv95/Contact_List#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.1",
+    "pg": "^8.11.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.17",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/node": "^20.4.4",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.1.6"
+  }
+}
