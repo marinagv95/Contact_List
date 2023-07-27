@@ -18,35 +18,40 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    const token = localStorage.getItem("@TOKEN")
+    const token = localStorage.getItem("@TOKEN");
 
-    if (!token) {
-        setLoading(false)
-        return
+    if (token) {
+      const userAutoLogin = async () => {
+        try {
+          const response = await api.get(`/contacts`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setUser(response.data);
+
+          navigate("/profile");
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      userAutoLogin();
     }
-
-    api.defaults.headers.common.Authorization = `Bearer ${token}`
-    setLoading(false)
-
-}, [])
-
-
+  }, []);
 
   const userRegister = async (formData: IRegisterFormValues) => {
     try {
       setLoading(true);
       const response = await api.post("/users", formData);
       setUser(response.data.user);
-      localStorage.setItem("@TOKEN", response.data.accessToken);
+      localStorage.setItem("@TOKEN", response.data.token);
       toast.success("Usuário registrado com sucesso");
       navigate("/");
+      setLoading(false);
     } catch (error) {
       console.log(error);
       toast.error("Algo deu errado");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -54,9 +59,16 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     try {
       setLoading(true);
       const response = await api.post("/login", formData);
-      setUser(response.data.user);
-      localStorage.setItem("@TOKEN", response.data.accessToken);
-      toast.success("Usuário logado com sucesso");
+      setUser(response.data);
+      localStorage.setItem("@TOKEN", response.data.token);
+      localStorage.setItem("@USER_DATA-name", response.data.user.name);
+      localStorage.setItem("@USER_DATA-email", response.data.user.email);
+      localStorage.setItem("@USER_DATA-id", response.data.user.id);
+      localStorage.setItem(
+        "@USER_DATA-telephone",
+        response.data.user.telephone
+      );
+      toast.success(`Usuário Logado com sucesso`);
       navigate("/profile");
     } catch (error) {
       console.log(error);
@@ -69,12 +81,25 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const userLogout = () => {
     setUser(null);
     localStorage.removeItem("@TOKEN");
+    localStorage.removeItem("@USER_DATA-name");
+    localStorage.removeItem("@USER_DATA-email");
+    localStorage.removeItem("@USER_DATA-telephone");
+    localStorage.removeItem("@USER_DATA-id");
     navigate("/");
+    toast.success("Usuário deslogado com sucesso");
   };
 
   return (
     <UserContext.Provider
-      value={{ loading, setLoading, user, userRegister, userLogin, userLogout }}
+      value={{
+        loading,
+        setLoading,
+        user,
+        userRegister,
+        userLogin,
+        userLogout,
+        setUser,
+      }}
     >
       {children}
     </UserContext.Provider>

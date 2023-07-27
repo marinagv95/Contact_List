@@ -6,10 +6,11 @@ import { AppError } from "../../error";
 import { TLoginRequest } from "../../interfaces/login.interface";
 import User from "../../entities/user.entity";
 import { AppDataSource } from "../../data-source";
+import { TUserResponse } from "../../interfaces/users.interface";
 
 const createTokenService = async (
   loginData: TLoginRequest
-): Promise<string> => {
+): Promise<{ token: string; user: TUserResponse }> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
   const user: User | null = await userRepository.findOne({
@@ -32,7 +33,15 @@ const createTokenService = async (
     subject: String(user.id),
   });
 
-  return token;
+  const userData: TUserResponse = {
+    name: user.name,
+    email: user.email,
+    id: user.id,
+    telephone: user.telephone,
+    createdAt: user.createdAt,
+  };
+
+  return { token, user: userData };
 };
 
 export default createTokenService;

@@ -15,6 +15,7 @@ import ensureTokenIsValidMiddleware from "../middlewares/ensureTokenIsValidMiddl
 import ensureOwnerUserMiddleware from "../middlewares/ensureOwnerUserMiddleware.middleware";
 import ensureIdExistsMiddleware from "../middlewares/ensureIdExistsMiddleware.middleware";
 import ensureEmailOrTelephoneAlreadyExistsMiddleware from "../middlewares/ensureEmailAlreadyExistsMiddleware.middleware";
+import { listAllContactsByUserController } from "../controllers/contact.controlle";
 
 const userRoutes = Router();
 
@@ -48,6 +49,11 @@ userRoutes.delete(
   ensureTokenIsValidMiddleware,
   ensureOwnerUserMiddleware,
   deleteUsersController
+);
+userRoutes.get(
+  "/:id/contacts",
+  ensureIdExistsMiddleware,
+  listAllContactsByUserController
 );
 
 export default userRoutes;

@@ -3,6 +3,7 @@ export interface IDefaultProviderProps {
   }
   
   export interface IUser {
+    find(arg0: (userData: { id: number; }) => boolean): unknown;
     id: string;
     name: string;
     email: string;
@@ -29,5 +30,6 @@ export interface IDefaultProviderProps {
     userRegister: (formData: IRegisterFormValues) => Promise<void>;
     userLogin: (formData: ILoginFormValues) => Promise<void>;
     userLogout: () => void;
+    setUser: React.Dispatch<React.SetStateAction<IUser | null>>
         
   }

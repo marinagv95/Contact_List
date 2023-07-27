@@ -1,9 +1,12 @@
+import { useContext } from "react";
+import { Outlet } from "react-router-dom";
+import { UserContext } from "../../providers/userProviders/userContexts";
 
+export default function ProtectRoutes() {
+  const { loading } = useContext(UserContext);
 
-const ProtectRoutes= () => {
-    return (
-      <div>Protect Router</div>
-    )
+  if (!loading) {
+    <div>Loading...</div>;
   }
-  
-  export default ProtectRoutes
+  return <Outlet />;
+}

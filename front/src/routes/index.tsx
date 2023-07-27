@@ -13,9 +13,8 @@ export default function AppRoutes() {
       <Route path="/users" element={<RegisterPage />} />
       <Route path="*" element={<PageNotFound />} />
 
-      <Route path="/profile" element={<ProtectRoutes />}>
-        <Route path="/profile" element={<ProfilePage />} />
-      </Route>
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route element={<ProtectRoutes />}></Route>
     </Routes>
   );
 }

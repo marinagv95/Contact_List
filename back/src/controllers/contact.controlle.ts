@@ -5,6 +5,8 @@ import updateContactService from "../services/contacts/updateContactService.serv
 import deleteContactService from "../services/contacts/deleteContactService.service";
 import Contact from "../entities/contact.entity";
 import retrieveContactService from "../services/contacts/retrieveContactService.service";
+import User from "../entities/user.entity";
+import listAllContactsByUserService from "../services/contacts/listAllContactsByUserService.service";
 
 const createContactController = async (req: Request, res: Response) => {
   const userId = res.locals.userId;
@@ -24,13 +26,24 @@ const retrieveContactController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-    const userId: number = parseInt(req.params.id);
-    const contact: Contact | null = await retrieveContactService(
-      userId
-    );
-  
-    return res.json(contact);
-  };
+  const userId: number = parseInt(req.params.id);
+  const contact: Contact | null = await retrieveContactService(userId);
+
+  return res.json(contact);
+};
+
+const listAllContactsByUserController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const userId: number = parseInt(req.params.id);
+
+  const contactUser: Contact[] | null = await listAllContactsByUserService(
+    userId
+  );
+
+  return res.json(contactUser);
+};
 
 const updateContactController = async (req: Request, res: Response) => {
   const contactId = Number(req.params.id);
@@ -50,4 +63,5 @@ export {
   updateContactController,
   deleteContactController,
   retrieveContactController,
+  listAllContactsByUserController,
 };

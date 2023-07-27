@@ -3,6 +3,7 @@ import ensureTokenIsValidMiddleware from "../middlewares/ensureTokenIsValidMiddl
 import {
   createContactController,
   deleteContactController,
+  listAllContactsByUserController,
   listContactController,
   retrieveContactController,
   updateContactController,
@@ -12,6 +13,7 @@ import {
   contactSchemaUpdateRequest,
 } from "../schemas/contactSchema.schema";
 import ensureDataIsValidMiddleware from "../middlewares/ensureDataIsValideMiddleware.middleware";
+import ensureIdExistsMiddleware from "../middlewares/ensureIdExistsMiddleware.middleware";
 
 const contactRoutes = Router();
 
@@ -27,6 +29,7 @@ contactRoutes.get(
   ensureTokenIsValidMiddleware,
   retrieveContactController
 );
+
 contactRoutes.patch(
   "/:id",
   ensureTokenIsValidMiddleware,

@@ -7,10 +7,9 @@ const createTokenController = async (
   res: Response
 ): Promise<Response> => {
   const loginData: TLoginRequest = req.body;
+  const { token, user } = await createTokenService(loginData);
 
-  const token = await createTokenService(loginData);
-
-  return res.json({ token });
+  return res.json({ token, user });
 };
 
 export { createTokenController };
