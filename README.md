@@ -72,6 +72,11 @@ Estrutura de Rotas:
 - **Descrição**: Página de busca de um contato específico.
 - **Funcionalidade**: Busca e mostra os detalhes de um contato específico pelo seu ID.
 
+### /users/:id/contacts (GET)
+
+- **Descrição**: Página de listagem de contatos do usuário.
+- **Funcionalidade**: Mostra todos os contatos cadastrados vinculados ao usuário.
+
 
 
 
