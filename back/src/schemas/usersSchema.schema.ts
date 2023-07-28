@@ -4,7 +4,12 @@ const userSchemaRequest = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string(),
-  telephone: z.string().regex(/^\(\d{2}\)\d{8,9}$/),
+  telephone: z
+    .string()
+    .regex(/^\(\d{2}\)\d{8,9}$/)
+    .refine((value) => /^\(\d{2}\)\d{8,9}$/.test(value), {
+      message: "Telefone no formato inválido (exemplo válido: (XX)XXXXXXXXX",
+    }),
 });
 
 const userSchema = userSchemaRequest.extend({

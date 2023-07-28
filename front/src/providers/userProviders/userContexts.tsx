@@ -7,6 +7,7 @@ import {
   IUser,
   IRegisterFormValues,
   ILoginFormValues,
+  IUserUpdate,
 } from "./@types";
 import { api } from "../../services/api";
 
@@ -15,6 +16,9 @@ export const UserContext = createContext({} as IUserContext);
 export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
+  const [userEditModal, setUserEditModal] = useState(false);
+  const [userEdit, setUserEdit] = useState<IUserUpdate | null>(null);
+  const [userDeleteModal, setUserDeleteModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -89,6 +93,47 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     toast.success("Usuário deslogado com sucesso");
   };
 
+  const userUpdate = async (formData: IUserUpdate, userId: number) => {
+    try {
+      const token = localStorage.getItem("@TOKEN");
+      const response = await api.patch(`/users/${userId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("Usuário atualizado com sucesso");
+
+      setUser(response.data);
+
+      localStorage.setItem("@USER_DATA-name", response.data.name);
+      localStorage.setItem("@USER_DATA-email", response.data.email);
+      localStorage.setItem("@USER_DATA-telephone", response.data.telephone);
+    } catch (error) {
+      console.log(error);
+      toast.error("Ops, algo deu errado ao atualizar o usuário");
+    }
+  };
+
+  const userDelete = async (userId: number) => {
+    try {
+      const token = localStorage.getItem("@TOKEN");
+      const response = await api.delete(`/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      toast.success("Usuário deletado com sucesso");
+
+      setUser(response.data);
+      localStorage.clear();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      toast.error("Ops, algo deu errado ao deletar o usuário");
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -99,6 +144,14 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         userLogin,
         userLogout,
         setUser,
+        userEditModal,
+        setUserEditModal,
+        userDeleteModal,
+        setUserDeleteModal,
+        userUpdate,
+        userEdit,
+        setUserEdit,
+        userDelete,
       }}
     >
       {children}
