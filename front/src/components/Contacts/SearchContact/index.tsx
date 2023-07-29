@@ -1,27 +1,27 @@
-import { MdSearch } from 'react-icons/md';
-import { useContext, useState } from 'react';
-import { ContactContext } from '../../providers/contactProviders/contactContext';
+import { MdSearch } from "react-icons/md";
+import { useContext, useState } from "react";
+import { ContactContext } from "../../../providers/contactProviders/contactContext";
 
 const SearchForm = () => {
   const { setSearch } = useContext(ContactContext);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   const submit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setSearch(searchValue);
 
-    setSearchValue('');
+    setSearchValue("");
   };
 
   return (
     <form onSubmit={submit}>
       <input
-        type='text'
-        placeholder='Digitar pesquisa'
+        type="text"
+        placeholder="Digitar pesquisa"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
-      <button type='submit'>
+      <button type="submit">
         <MdSearch />
       </button>
     </form>

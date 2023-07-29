@@ -43,4 +43,6 @@ export interface IUserContext {
   userEdit: IUserUpdate | null;
   setUserEdit: React.Dispatch<React.SetStateAction<IUserUpdate | null>>;
   userDelete: (userId: number) => Promise<void>;
+  userData: IUser | null;
+  setUserData: React.Dispatch<React.SetStateAction<IUser | null>>
 }

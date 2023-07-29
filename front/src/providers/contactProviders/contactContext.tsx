@@ -13,7 +13,14 @@ export const ContactContext = createContext({} as IContactContext);
 export const ContactProvider = ({ children }: IDefaultProviderProps) => {
   const [contact, setContact] = useState<IContact[]>([]);
   const [contactEdit, setContactEdit] = useState<IContactUpdate | null>(null);
-  const [contactCreate, setContactCreate] = useState(null);
+  const [contacts, setContacts] = useState<IContact[]>([]);
+  const [contactCreateModal, setContactCreateModal]= useState(false)
+  const [contactDeleteModal, setContactDeleteModal]= useState(false)
+  const [contactEditModal, setContactEditModal]= useState(false)
+  const [editingContactId, setEditingContactId] = useState<number | null>(null);
+  const [deleteContactId, setDeleteContactId] = useState<number | null>(null);
+
+
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -43,8 +50,8 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      toast.success(`Contato ${response.data.name} adicionadocom sucesso`);
-      setContact([...contact, response.data]);
+      toast.success(`Contato ${response.data.name} adicionado com sucesso`);
+      setContacts([...contacts, response.data]); 
     } catch (error) {
       console.log(error);
       toast.error("Algo deu errado...");
@@ -99,7 +106,7 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const searchContactList = contact.filter((contactFilter) =>
+  const searchContactList = contacts.filter((contactFilter) =>
     search === ""
       ? true
       : contactFilter.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -114,14 +121,24 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
         setContact,
         contactEdit,
         setContactEdit,
-        contactCreate,
-        setContactCreate,
         search,
         setSearch,
         createNewContact,
         removeContact,
         contactUpdate,
         searchContactList,
+        contacts,
+        setContacts,
+        contactCreateModal,
+        contactDeleteModal,
+        contactEditModal,
+        setContactCreateModal,
+        setContactDeleteModal,
+        setContactEditModal,
+        editingContactId,
+        setEditingContactId,    
+        deleteContactId,
+        setDeleteContactId    
       }}
     >
       {children}

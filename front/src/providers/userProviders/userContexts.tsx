@@ -19,6 +19,8 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const [userEditModal, setUserEditModal] = useState(false);
   const [userEdit, setUserEdit] = useState<IUserUpdate | null>(null);
   const [userDeleteModal, setUserDeleteModal] = useState(false);
+  const [userData, setUserData] = useState<IUser | null>(null);
+
 
   const navigate = useNavigate();
 
@@ -152,6 +154,8 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         userEdit,
         setUserEdit,
         userDelete,
+        userData,
+        setUserData
       }}
     >
       {children}

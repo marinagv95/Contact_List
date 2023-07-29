@@ -8,7 +8,11 @@ import { useContext } from "react";
 import { UserContext } from "../../providers/userProviders/userContexts";
 
 const LoginPage = () => {
-  const { register, handleSubmit } = useForm<LoginData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginData>({
     resolver: zodResolver(loginSchema),
   });
   const { userLogin } = useContext(UserContext);
@@ -35,12 +39,16 @@ const LoginPage = () => {
           placeholder="Seu e-mail"
           {...register("email")}
         />
+        {errors.email && <span>{errors.email.message}</span>}
+
         <input
           type="password"
           id="password"
           placeholder="Sua senha"
           {...register("password")}
         />
+        {errors.password && <span>{errors.password.message}</span>}
+
         <button type="submit">Login</button>
 
         <p>ou</p>

@@ -8,7 +8,11 @@ import { UserContext } from "../../providers/userProviders/userContexts";
 import { registerSchema } from "../../validators/register";
 
 const RegisterPage = () => {
-  const { register, handleSubmit } = useForm<IRegisterFormValues>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IRegisterFormValues>({
     resolver: zodResolver(registerSchema),
   });
   const { userRegister } = useContext(UserContext);
@@ -34,24 +38,32 @@ const RegisterPage = () => {
           placeholder="Seu nome completo"
           {...register("name")}
         />
+        {errors.name && <span>{errors.name.message}</span>}
+
         <input
           type="email"
           id="email"
           placeholder="Seu e-mail"
           {...register("email")}
         />
+        {errors.email && <span>{errors.email.message}</span>}
+
         <input
           type="password"
           id="password"
           placeholder="Sua senha"
           {...register("password")}
         />
+        {errors.password && <span>{errors.password.message}</span>}
+
         <input
           type="telephone"
           id="telephone"
           placeholder="Seu telephone"
           {...register("telephone")}
         />
+        {errors.telephone && <span>{errors.telephone.message}</span>}
+
         <button type="submit">Cadastrar</button>
 
         <p>ou</p>
@@ -63,4 +75,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage
+export default RegisterPage;
