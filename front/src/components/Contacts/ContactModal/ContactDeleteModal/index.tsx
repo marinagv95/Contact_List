@@ -10,7 +10,7 @@ const CreateDeleteModal = () => {
     removeContact(Number(deleteContactId));
     const updatedContacts = contacts.filter((contact) => contact.id !== deleteContactId);
     setContacts(updatedContacts);
-    setContactDeleteModal(false); // Fecha o modal de confirmação após a remoção
+    setContactDeleteModal(false); 
   };
 
   return (
