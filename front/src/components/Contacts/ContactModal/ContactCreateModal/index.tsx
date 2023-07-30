@@ -3,9 +3,12 @@ import { ContactContext } from "../../../../providers/contactProviders/contactCo
 import { IContact } from "../../../../providers/contactProviders/@types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ModalContainer, ModalDialog } from "../../../../styles/GlobalStyle";
 import { MdClose } from "react-icons/md";
 import { createContactSchema } from "../../../../validators/Contacts/createContact";
+import { CloseButton, ModalContainer, ModalDialog, ModalTitle } from "../../../../styles/components/Modal";
+import { Formulare } from "../../../../styles/components/Form";
+import { InputContainer } from "../../../../styles/components/Input";
+import { CustomButton } from "../../../../styles/components/Button";
 
 const CreateContactModal = () => {
   const { setContactCreateModal, createNewContact } =
@@ -22,37 +25,37 @@ const CreateContactModal = () => {
   return (
     <ModalContainer>
       <ModalDialog>
-        <h2>Adicionar Contato</h2>
-        <button
+        <ModalTitle>Adicionar Contato</ModalTitle>
+        <CloseButton
           type="button"
           aria-label="Fechar"
           onClick={() => setContactCreateModal(false)}
         >
           <MdClose size={21} />
-        </button>
-        <form onSubmit={handleSubmit(submit)}>
-          <input
+        </CloseButton>
+        <Formulare  onSubmit={handleSubmit(submit)}>
+          <InputContainer
             type="text"
             placeholder="Nome do contato"
             {...register("name")}
           />
           {errors.name && <span>{errors.name.message}</span>}
 
-          <input
+          <InputContainer
             type="email"
             {...register("email")}
             placeholder="Email do contato"
           />
           {errors.email && <span>{errors.email.message}</span>}
-          <input
+          <InputContainer
             type="text"
             {...register("telephone")}
             placeholder="Telefone do contato"
           />
           {errors.telephone && <span>{errors.telephone.message}</span>}
 
-          <button type="submit">Adicionar</button>
-        </form>
+          <CustomButton background="#0385CD" color="#ffffff" bordercolor="#0385CD"  type="submit">Adicionar</CustomButton>
+        </Formulare>
       </ModalDialog>
     </ModalContainer>
   );

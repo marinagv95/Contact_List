@@ -5,6 +5,8 @@ import deleteTrash from "/src/assets/deleteTrash.png";
 import editePen from "/src/assets/editPen.png";
 import CreateEditModal from "../ContactModal/ContactEditModal";
 import ContactDeleteModal from "../ContactModal/ContactDeleteModal";
+import { HeaderButton } from "../../../pages/Profile/syle";
+import { ContactCard, ContactListHeader, ContactUlCard } from "./style";
 
 const ContactList = () => {
   const {
@@ -18,41 +20,47 @@ const ContactList = () => {
   } = useContext(ContactContext);
 
   return (
-    <>
-      <h2>Contatos:</h2>
-      <h3>Lista de contatos</h3>
-      <SearchForm />
+    <div>
+      <ContactListHeader>
+        <h3>Lista de contatos</h3>
+        <SearchForm />
+      </ContactListHeader>
 
-      <ul>
+      <ContactUlCard>
         {searchContactList.map((contact) => (
-          <li key={contact.id}>
-            <p>{contact.name}</p>
-            <p>{contact.email}</p>
-            <p>{contact.telephone}</p>
+          <ContactCard key={contact.id}>
+            <h2>{contact.name}</h2>
+            <div className="user-info-row">
+              <p>Email:{contact.email}</p>
+              <p>Telefone:{contact.telephone}</p>
 
-            <button
-              onClick={() => {
-                setEditingContactId(contact.id), setContactEditModal(true);
-              }}
-            >
-              <img src={editePen} alt="editar" />
-            </button>
+              <div>
+                <HeaderButton
+                  onClick={() => {
+                    setEditingContactId(contact.id), setContactEditModal(true);
+                  }}
+                >
+                  <img src={editePen} alt="editar" />
+                </HeaderButton>
 
-            <button>
-              <img
-                src={deleteTrash}
-                alt="deletar"
-                onClick={() => {
-                  setDeleteContactId(contact.id), setContactDeleteModal(true);
-                }}
-              />
-            </button>
-          </li>
+                <HeaderButton>
+                  <img
+                    src={deleteTrash}
+                    alt="deletar"
+                    onClick={() => {
+                      setDeleteContactId(contact.id),
+                        setContactDeleteModal(true);
+                    }}
+                  />
+                </HeaderButton>
+              </div>
+            </div>
+          </ContactCard>
         ))}
         {contactEditModal && <CreateEditModal />}
         {contactDeleteModal && <ContactDeleteModal />}
-      </ul>
-    </>
+      </ContactUlCard>
+    </div>
   );
 };
 

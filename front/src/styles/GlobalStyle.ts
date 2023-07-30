@@ -1,8 +1,8 @@
-import styled, { createGlobalStyle } from "styled-components";
+import  { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
    :root {
-    --color-blue: #4200FF
+    --color-blue: #0385CD
     --color-white: #FFFFFF
     --color-black: #000000
     --color-red: #CE4646
@@ -57,15 +57,4 @@ export const GlobalStyle = createGlobalStyle`
 
 `;
 
-export const ModalContainer = styled.div`
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  max-width: 400px; /* Define a largura máxima para o modal */
-`;
 
-
-export const ModalDialog = styled.dialog`
-display: contents;
-`;

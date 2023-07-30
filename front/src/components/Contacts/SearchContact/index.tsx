@@ -1,6 +1,6 @@
-import { MdSearch } from "react-icons/md";
 import { useContext, useState } from "react";
 import { ContactContext } from "../../../providers/contactProviders/contactContext";
+import { SearchIcon, SearchInput } from "./style";
 
 const SearchForm = () => {
   const { setSearch } = useContext(ContactContext);
@@ -15,14 +15,14 @@ const SearchForm = () => {
 
   return (
     <form onSubmit={submit}>
-      <input
+      <SearchInput
         type="text"
         placeholder="Digitar pesquisa"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
       <button type="submit">
-        <MdSearch />
+        <SearchIcon />
       </button>
     </form>
   );

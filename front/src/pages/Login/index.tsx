@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import ContactListLogo from "/src/assets/ContactListLogo.jpg";
 import { LoginData, loginSchema } from "../../validators/login";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,6 +5,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ILoginFormValues } from "../../providers/userProviders/@types";
 import { useContext } from "react";
 import { UserContext } from "../../providers/userProviders/userContexts";
+import { CustomButton } from "../../styles/components/Button";
+import { InputContainer } from "../../styles/components/Input";
+import { HeaderContainer, MainContainer } from "../../styles/components/Header";
+import { CustomLink } from "../../styles/components/Link";
+import { Formulare } from "../../styles/components/Form";
 
 const LoginPage = () => {
   const {
@@ -22,18 +26,25 @@ const LoginPage = () => {
   };
 
   return (
-    <main>
-      <header>
+    <MainContainer>
+      <HeaderContainer>
         <img src={ContactListLogo} alt="Logo" />
-        <Link className="linkToRegister" to="/users">
+        <CustomLink
+          widht="142px"
+          background="#0385CD"
+          color="#ffffff"
+          bordercolor="#0385CD"
+          className="linkToRegister"
+          to="/users"
+        >
           Cadastro
-        </Link>
-      </header>
-      <h2>Login</h2>
-      <h3>Preencha os campos para realizar login</h3>
+        </CustomLink>
+      </HeaderContainer>
 
-      <form onSubmit={handleSubmit(submit)}>
-        <input
+      <Formulare onSubmit={handleSubmit(submit)}>
+        <h2>Login</h2>
+        <h3>Preencha os campos para realizar login</h3>
+        <InputContainer
           type="email"
           id="email"
           placeholder="Seu e-mail"
@@ -41,7 +52,7 @@ const LoginPage = () => {
         />
         {errors.email && <span>{errors.email.message}</span>}
 
-        <input
+        <InputContainer
           type="password"
           id="password"
           placeholder="Sua senha"
@@ -49,14 +60,28 @@ const LoginPage = () => {
         />
         {errors.password && <span>{errors.password.message}</span>}
 
-        <button type="submit">Login</button>
+        <CustomButton
+          background="#0385CD"
+          color="#ffffff"
+          bordercolor="#0385CD"
+          type="submit"
+        >
+          Login
+        </CustomButton>
 
         <p>ou</p>
-        <Link className="linkToRegister" to="/users">
+        <CustomLink
+          widht="422px"
+          background="#ffffff"
+          color="#0385CD"
+          bordercolor="#0385CD"
+          className="linkToRegister"
+          to="/users"
+        >
           Cadastre-se
-        </Link>
-      </form>
-    </main>
+        </CustomLink>
+      </Formulare>
+    </MainContainer>
   );
 };
 

@@ -1,7 +1,13 @@
 import { useContext } from "react";
 import { UserContext } from "../../../providers/userProviders/userContexts";
 import { MdClose } from "react-icons/md";
-import { ModalContainer, ModalDialog } from "../../../styles/GlobalStyle";
+import {
+  CloseButton,
+  ModalContainer,
+  ModalDialog,
+  ModalTitle,
+} from "../../../styles/components/Modal";
+import { CustomButton } from "../../../styles/components/Button";
 
 const UserDeleteModal = () => {
   const { setUserDeleteModal, userDelete } = useContext(UserContext);
@@ -10,21 +16,24 @@ const UserDeleteModal = () => {
   return (
     <ModalContainer>
       <ModalDialog>
-        <h2>Você deseja mesmo deletar a sua conta?</h2>
-        <button
+        <ModalTitle>Você deseja mesmo deletar a sua conta?</ModalTitle>
+        <CloseButton
           type="button"
           aria-label="Fechar"
           onClick={() => setUserDeleteModal(false)}
         >
           <MdClose size={21} />
-        </button>
+        </CloseButton>
 
-        <button
+        <CustomButton
+          background="#CE4646"
+          color="#ffffff"
+          bordercolor="#CE4646"
           type="button"
           onClick={() => [userDelete(id), setUserDeleteModal(false)]}
         >
           Deletar
-        </button>
+        </CustomButton>
       </ModalDialog>
     </ModalContainer>
   );

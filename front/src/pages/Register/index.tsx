@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import ContactListLogo from "/src/assets/ContactListLogo.jpg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -6,6 +5,11 @@ import { IRegisterFormValues } from "../../providers/userProviders/@types";
 import { useContext } from "react";
 import { UserContext } from "../../providers/userProviders/userContexts";
 import { registerSchema } from "../../validators/register";
+import { HeaderContainer, MainContainer } from "../../styles/components/Header";
+import { CustomLink } from "../../styles/components/Link";
+import { InputContainer } from "../../styles/components/Input";
+import { CustomButton } from "../../styles/components/Button";
+import { Formulare } from "../../styles/components/Form";
 
 const RegisterPage = () => {
   const {
@@ -22,17 +26,24 @@ const RegisterPage = () => {
   };
 
   return (
-    <main>
-      <header>
+    <MainContainer>
+      <HeaderContainer>
         <img src={ContactListLogo} alt="Logo" />
-        <Link className="linkToRegister" to="/">
+        <CustomLink
+          widht="142px"
+          background="#0385CD"
+          color="#ffffff"
+          bordercolor="#0385CD"
+          className="linkToRegister"
+          to="/"
+        >
           Login
-        </Link>
-      </header>
-      <h2>Cadastre-se</h2>
+        </CustomLink>
+      </HeaderContainer>
 
-      <form onSubmit={handleSubmit(submit)}>
-        <input
+      <Formulare onSubmit={handleSubmit(submit)}>
+        <h2>Cadastre-se</h2>
+        <InputContainer
           type="name"
           id="name"
           placeholder="Seu nome completo"
@@ -40,7 +51,7 @@ const RegisterPage = () => {
         />
         {errors.name && <span>{errors.name.message}</span>}
 
-        <input
+        <InputContainer
           type="email"
           id="email"
           placeholder="Seu e-mail"
@@ -48,7 +59,7 @@ const RegisterPage = () => {
         />
         {errors.email && <span>{errors.email.message}</span>}
 
-        <input
+        <InputContainer
           type="password"
           id="password"
           placeholder="Sua senha"
@@ -56,7 +67,7 @@ const RegisterPage = () => {
         />
         {errors.password && <span>{errors.password.message}</span>}
 
-        <input
+        <InputContainer
           type="telephone"
           id="telephone"
           placeholder="Seu telephone"
@@ -64,14 +75,28 @@ const RegisterPage = () => {
         />
         {errors.telephone && <span>{errors.telephone.message}</span>}
 
-        <button type="submit">Cadastrar</button>
+        <CustomButton
+          background="#0385CD"
+          color="#ffffff"
+          bordercolor="#0385CD"
+          type="submit"
+        >
+          Cadastrar
+        </CustomButton>
 
         <p>ou</p>
-        <Link className="linkToRegister" to="/">
+        <CustomLink
+          widht="422px"
+          background="#ffffff"
+          color="#0385CD"
+          bordercolor="#0385CD"
+          className="linkToLogin"
+          to="/"
+        >
           Retornar
-        </Link>
-      </form>
-    </main>
+        </CustomLink>
+      </Formulare>
+    </MainContainer>
   );
 };
 

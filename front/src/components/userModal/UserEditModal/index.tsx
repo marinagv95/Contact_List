@@ -1,11 +1,14 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../../providers/userProviders/userContexts";
 import { MdClose } from "react-icons/md";
-import { ModalContainer, ModalDialog } from "../../../styles/GlobalStyle";
+import { CloseButton, ModalContainer, ModalDialog, ModalTitle } from "../../../styles/components/Modal";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IUserUpdate } from "../../../providers/userProviders/@types";
 import { userSchemaUpdateRequest } from "../../../validators/updateUser";
+import { Formulare } from "../../../styles/components/Form";
+import { InputContainer } from "../../../styles/components/Input";
+import { CustomButton } from "../../../styles/components/Button";
 
 const UserEditModal = () => {
   const { setUserEditModal, userUpdate, user, setUserEdit } =
@@ -44,30 +47,30 @@ const UserEditModal = () => {
   return (
     <ModalContainer>
       <ModalDialog>
-        <h2>Editar Perfil</h2>
-        <button
+        <ModalTitle>Editar Perfil</ModalTitle>
+        <CloseButton
           type="button"
           aria-label="Fechar"
           onClick={() => setUserEditModal(false)}
         >
           <MdClose size={21} />
-        </button>
-        <form onSubmit={handleSubmit(submit)}>
-          <input type="text" {...register("name")} placeholder="Seu nome" />
+        </CloseButton>
+        <Formulare onSubmit={handleSubmit(submit)}>
+          <InputContainer type="text" {...register("name")} placeholder="Seu nome" />
           {errors.name && <span>{errors.name.message}</span>}
 
-          <input type="email" {...register("email")} placeholder="Seu email" />
+          <InputContainer type="email" {...register("email")} placeholder="Seu email" />
           {errors.email && <span>{errors.email.message}</span>}
 
-          <input
+          <InputContainer
             type="text"
             {...register("telephone")}
             placeholder="Seu telefone"
           />
           {errors.telephone && <span>{errors.telephone.message}</span>}
 
-          <button type="submit">Editar</button>
-        </form>
+          <CustomButton background="#0385CD" color="#ffffff" bordercolor="#0385CD" type="submit">Editar</CustomButton>
+        </Formulare>
       </ModalDialog>
     </ModalContainer>
   );

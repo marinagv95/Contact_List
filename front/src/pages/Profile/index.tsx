@@ -2,29 +2,32 @@ import { useEffect, useContext } from "react";
 import { UserContext } from "../../providers/userProviders/userContexts";
 import { api } from "../../services/api";
 import ContactListLogo from "/src/assets/ContactListLogo.jpg";
-import editePen from "/src/assets/editPen.png";
-import deleteTrash from "/src/assets/deleteTrash.png";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../providers/userProviders/@types";
-import UserEditModal from "../../components/userModal/UserEditModal";
-import UserDeleteModal from "../../components/userModal/UserDeleteModal";
 import { IContact } from "../../providers/contactProviders/@types";
 import { ContactContext } from "../../providers/contactProviders/contactContext";
 import ContactList from "../../components/Contacts/ContactList";
 import UserInfo from "../../components/User/UserInfo";
 import CreateContactModal from "../../components/Contacts/ContactModal/ContactCreateModal";
+import {
+  DivButtonContainer,
+  DivContactsContainer,
+  DivEmptyCointainer,
+  EmptyContactsMessage,
+  MainContainerProfile,
+  UserInfoContainer,
+} from "./syle";
+import { HeaderContainer, HeaderWrapper } from "../../styles/components/Header";
+import {
+  CustomButton,
+  CustomButtonLogout,
+} from "../../styles/components/Button";
 
 const ProfilePage = () => {
-  const {
-    user,
-    userLogout,
-    setUserEditModal,
-    userEditModal,
-    setUserDeleteModal,
-    userDeleteModal,
-  } = useContext(UserContext);
+  const { user, userLogout } = useContext(UserContext);
   const { setUserData } = useContext(UserContext);
-  const { contacts, setContacts, setContactCreateModal, contactCreateModal } = useContext(ContactContext);
+  const { contacts, setContacts, setContactCreateModal, contactCreateModal } =
+    useContext(ContactContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,47 +47,48 @@ const ProfilePage = () => {
   }, [user, navigate]);
 
   return (
-    <>
-      <header>
-        <nav>
+    <MainContainerProfile>
+      <HeaderContainer>
+        <HeaderWrapper>
           <img src={ContactListLogo} alt="Logo" />
-          <button
+          <CustomButtonLogout
             className="returnPage"
             type="submit"
             onClick={() => userLogout()}
           >
             Logout
-          </button>
-        </nav>
-        <div>
-          <UserInfo />
-          <div>
-            <button onClick={() => setUserEditModal(true)}>
-              <img src={editePen} alt="editar" />
-            </button>
-            {userEditModal && <UserEditModal />}
-            <button>
-              <img
-                src={deleteTrash}
-                alt="deletar"
-                onClick={() => setUserDeleteModal(true)}
-              />
-            </button>
-            {userDeleteModal && <UserDeleteModal />}
-          </div>
-        </div>
-      </header>
-      <main>
+          </CustomButtonLogout>
+        </HeaderWrapper>
+      </HeaderContainer>
+      <UserInfoContainer>
+        <UserInfo />
+      </UserInfoContainer>
+      <DivContactsContainer>
         {contacts.length > 0 ? (
           <ContactList />
         ) : (
-          <h2>Você ainda não possui contatos</h2>
+          <DivEmptyCointainer>
+            <EmptyContactsMessage>
+              Você ainda não possui contatos
+            </EmptyContactsMessage>
+          </DivEmptyCointainer>
         )}
-        <button type="button" onClick={()=> setContactCreateModal(true)}>Adicionar Contato</button>
-        {contactCreateModal && <CreateContactModal />}
 
-      </main>
-    </>
+        <DivButtonContainer>
+          <CustomButton
+            
+            background="#0385CD"
+            color="#ffffff"
+            bordercolor="#0385CD"
+            type="button"
+            onClick={() => setContactCreateModal(true)}
+          >
+            Adicionar Contato
+          </CustomButton>
+          {contactCreateModal && <CreateContactModal />}
+        </DivButtonContainer>
+      </DivContactsContainer>
+    </MainContainerProfile>
   );
 };
 
