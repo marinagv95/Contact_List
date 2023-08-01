@@ -27,30 +27,7 @@ ou
 
 yarn install
 
-5. Crie uma nova migração para o banco de dados :
-com npm: npm run typeorm migration:generate ./src/migrations/NomeDaMigracao -- -d ./src/data-source.ts
-
-Substitua "NomeDaMigracao" pelo nome que deseja dar à nova migração.
-
-após isso será usado o comando para rodar as migrações
-com npm: npm run typeorm migration:run -- -d ./src/data-source
-
-
-ou, se você estiver usando Yarn:
-yarn typeorm migration:create -n NomeDaMigracao
-
-
-Substitua "NomeDaMigracao" pelo nome que deseja dar à nova migração.
-
-5. Execute as migrações do banco de dados para criar as tabelas necessárias:
-npm run typeorm migration:run
-
-ou
-
-yarn typeorm migration:run
-
-
-7. Execute o servidor backend com o comando:
+4. Execute o servidor backend com o comando:
 npm start
 
 ou
