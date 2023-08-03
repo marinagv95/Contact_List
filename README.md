@@ -1,6 +1,6 @@
 # Projeto: Cadastro de Clientes e Contatos
 
-Este é um projeto de uma aplicação web desenvolvido em JavaScript/TypeScript que permite o cadastro de clientes e seus contatos associados. A aplicação possui operações básicas de um CRUD (Create, Read, Update, Delete) para clientes e contatos, bem como a funcionalidade de gerar um relatório em tela ou exportá-lo em formato PDF contendo os dados do cliente e seus contatos vinculados.
+Este é um projeto de uma aplicação web desenvolvida em JavaScript/TypeScript que permite o cadastro de clientes e seus contatos associados. A aplicação possui operações básicas de um CRUD (Create, Read, Update, Delete) para clientes e contatos, bem como a funcionalidade de gerar um relatório em tela ou exportá-lo em formato PDF contendo os dados do cliente e seus contatos vinculados.
 
 ## Tecnologias Utilizadas:
 
@@ -13,69 +13,57 @@ Este é um projeto de uma aplicação web desenvolvido em JavaScript/TypeScript 
 
 Certifique-se de ter o Node.js instalado em sua máquina. Siga as instruções abaixo para instalar e executar a aplicação:
 
-1. Faça o clone deste repositório em seu ambiente Unix (Linux ou Mac OS X).
-
 ### Backend:
 
-2. Navegue até o diretório do backend no terminal:
-cd back
+1. Faça o clone deste repositório em seu ambiente Unix (Linux ou Mac OS X).
+2. Navegue até o diretório do backend no terminal: `cd back`
+3. Crie um arquivo `.env` no diretório do backend e configure as variáveis de ambiente necessárias, como as credenciais do banco de dados e outras configurações. Um exemplo de configuração pode ser encontrado em `.env.example`.
+4. Instale as dependências do backend executando o comando: `npm install` ou `yarn install`
+5. Execute o servidor backend com o comando: `npm start` ou `yarn start`
 
-3. Instale as dependências do backend executando o comando:
-npm install
+**Gerando e Rodando Migrações do Banco de Dados:**
 
-ou
+O backend utiliza migrações de banco de dados para controlar as alterações no esquema. Aqui está como rodar ou gerar migrações:
 
-yarn install
+##### Rodando Migrações Existentes:
 
-4. Execute o servidor backend com o comando:
-npm start
+1. Certifique-se de que o banco de dados esteja configurado corretamente no arquivo `.env`.
+2. Execute as migrações existentes para atualizar o banco de dados: `npm run migrate` ou `yarn migrate`
 
-ou
+##### Gerando Novas Migrações:
 
-yarn start
+Se você fez alterações nos modelos de dados e deseja gerar uma nova migração:
 
+1. Certifique-se de que as alterações nos modelos de dados estejam refletidas no código.
+2. Gere uma nova migração: `npm run generate-migration NomeDaMigracao` ou `yarn generate-migration NomeDaMigracao`
+
+Lembre-se de substituir `NomeDaMigracao` por um nome descritivo para a migração.
 
 ### Frontend:
 
-7. Em outro terminal, navegue até o diretório do frontend:
-cd front
+1. Em outro terminal, navegue até o diretório do frontend: `cd front`
+2. Instale as dependências do frontend executando o comando: `npm install` ou `yarn install`
+3. Execute o frontend com o comando: `npm start` ou `yarn start`
 
-8. Instale as dependências do frontend executando o comando:
-npm install
-
-ou
-yarn install
-
-
-9. Execute o frontend com o comando:
-npm start
-
-ou
-yarn start
-
-
-
-Após seguir os passos acima, a aplicação estará disponível em seu navegador pelo endereço: http://localhost:3000.
+Após seguir os passos acima, a aplicação estará disponível em seu navegador pelo endereço: [http://localhost:3000](http://localhost:3000).
 
 ## Estrutura de Rotas:
 
-Endpoints da API:
+### Endpoints da API:
 
-### Clientes:
+#### Clientes:
 
-- **POST /users:** Página de cadastro de um novo cliente. Permite cadastrar um novo cliente no sistema.
-- **PATCH /users/:id:** Página de modificação de um cliente existente. Permite atualizar os dados de um cliente específico.
-- **DELETE /users/:id:** Página de deleção de um cliente existente. Permite excluir um cliente específico do sistema.
-- **GET /users/:id:** Página de detalhes de um cliente específico. Mostra os dados e contatos vinculados de um cliente específico.
-- **GET /users:** Página de listagem de todos os clientes cadastrados. Mostra todos os clientes cadastrados no sistema.
+- POST `/users`: Página de cadastro de um novo cliente. Permite cadastrar um novo cliente no sistema.
+- PATCH `/users/🆔`: Página de modificação de um cliente existente. Permite atualizar os dados de um cliente específico.
+- DELETE `/users/🆔`: Página de deleção de um cliente existente. Permite excluir um cliente específico do sistema.
+- GET `/users/🆔`: Página de detalhes de um cliente específico. Mostra os dados e contatos vinculados de um cliente específico.
+- GET `/users`: Página de listagem de todos os clientes cadastrados. Mostra todos os clientes cadastrados no sistema.
 
-### Contatos:
+#### Contatos:
 
-- **POST /contacts:** Página de cadastro de um novo contato. Permite cadastrar um novo contato vinculado a um cliente.
-- **PATCH /contacts/:id:** Página de atualização de um contato existente. Permite atualizar os dados de um contato específico.
-- **DELETE /contacts/:id:** Página de deleção de um contato existente. Permite excluir um contato específico do sistema.
-- **GET /contacts:** Página de listagem de contatos do usuário. Mostra todos os contatos cadastrados vinculados ao usuário.
-- **GET /contacts/:id:** Página de busca de um contato específico. Busca e mostra os detalhes de um contato específico pelo seu ID.
-- **GET /users/:id/contacts:** Página de listagem de contatos do usuário. Mostra todos os contatos cadastrados vinculados ao usuário.
-
-Certifique-se de seguir as etapas de configuração e execução descritas acima para garantir qu
+- POST `/contacts`: Página de cadastro de um novo contato. Permite cadastrar um novo contato vinculado a um cliente.
+- PATCH `/contacts/🆔`: Página de atualização de um contato existente. Permite atualizar os dados de um contato específico.
+- DELETE `/contacts/🆔`: Página de deleção de um contato existente. Permite excluir um contato específico do sistema.
+- GET `/contacts`: Página de listagem de contatos do usuário. Mostra todos os contatos cadastrados vinculados ao usuário.
+- GET `/contacts/🆔`: Página de busca de um contato específico. Busca e mostra os detalhes de um contato específico pelo seu ID.
+- GET `/users/:id/contacts`: Página de listagem de contatos do usuário. Mostra todos os contatos cadastrados vinculados ao usuário.
