@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-
-
 export const Formulare = styled.form`
   display: flex;
   flex-direction: column;
@@ -33,6 +31,12 @@ export const Formulare = styled.form`
 
   span {
     color: red;
+    font-size: 14px;
+  }
+
+  @media (max-width: 600px) {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
-

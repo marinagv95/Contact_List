@@ -100,12 +100,14 @@ export const UserInfoContainer = styled.div`
     color: black;
     margin: 0 44px;
   }
-
   @media (max-width: 768px) {
     width: 90%;
-
     h2 {
       font-size: 20px;
+    }
+
+    .user-info-row p {
+      margin: 0;  
     }
   }
 `;

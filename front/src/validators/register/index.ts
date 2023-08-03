@@ -6,13 +6,8 @@ export const registerSchema = z.object({
   password: z.string().nonempty("Senha é obrigatória"),
   telephone: z
     .string()
-    .regex(/^\(\d{2}\)\d{8,9}$/)
-    .nonempty("Telefone obrigatório")
-    .refine((value) => /^\(\d{2}\)\d{8,9}$/.test(value), {
-      message: "Telefone no formato inválido (exemplo válido: (XX)XXXXXXXXX",
-    }),
+    .nonempty("Telefone no formato inválido! Exemplo: (XX)XXXXXXXXX")
+    .regex(/^\(\d{2}\)\d{8,9}$/),
 });
 
-
 export type LoginData = z.infer<typeof registerSchema>;
-
