@@ -5,7 +5,6 @@ import updateContactService from "../services/contacts/updateContactService.serv
 import deleteContactService from "../services/contacts/deleteContactService.service";
 import Contact from "../entities/contact.entity";
 import retrieveContactService from "../services/contacts/retrieveContactService.service";
-import User from "../entities/user.entity";
 import listAllContactsByUserService from "../services/contacts/listAllContactsByUserService.service";
 
 const createContactController = async (req: Request, res: Response) => {
